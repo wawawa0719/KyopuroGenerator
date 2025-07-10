@@ -27,6 +27,7 @@
     "lint": "next lint"
   },
   "devDependencies": {
+    "@types/react-katex": "^3.0.4",
     "@vercel/node": "^5.3.3",
     "eslint-config-next": "^15.3.5"
   }

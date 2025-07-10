@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Problem } from '../types/problem';
 import { Card, CardContent, Typography, Box, Paper } from '@mui/material';
@@ -14,11 +13,9 @@ const MathRenderer: React.FC<{ text: string }> = ({ text }) => {
     return (
         <>
             {parts.map((part, index) => {
-                if (part.startsWith('$') && part.endsWith('$')) {
+                if (part.startsWith('$$') && part.endsWith('$$')) {
                     return <BlockMath key={index} math={part.slice(2, -2)} />;
-                } else if (part.startsWith('
-) && part.endsWith('
-)) {
+                } else if (part.startsWith('$') && part.endsWith('$')) {
                     return <InlineMath key={index} math={part.slice(1, -1)} />;
                 }
                 return <React.Fragment key={index}>{part}</React.Fragment>;
