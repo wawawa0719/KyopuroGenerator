@@ -12,6 +12,7 @@ const MathRenderer: React.FC<{ text: string }> = ({ text }) => {
 
     return (
         <>
+
             {parts.map((part, index) => {
                 if (part.startsWith('$$') && part.endsWith('$$')) {
                     return <BlockMath key={index} math={part.slice(2, -2)} />;
