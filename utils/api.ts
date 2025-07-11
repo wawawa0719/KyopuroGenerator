@@ -3,7 +3,7 @@ import { Problem } from '../types/problem';
 import { logger } from './logger';
 
 const API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${API_KEY}`;
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
 const getPrompt = (difficulty: string, genre?: string): string => {
     let basePrompt = `
