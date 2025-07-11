@@ -11,7 +11,7 @@ const ResultDisplay: React.FC<Props> = ({ result, detailedResults }) => {
     if (!result && detailedResults.length === 0) return null;
 
     const getStatusColor = (status: string) => {
-        if (status.startsWith('AC')) return '#4caf50'; // Green
+        if (status.startsWith('AC')) return '#4caf50'; // Greenn
         if (status.startsWith('WA')) return '#f44336'; // Red
         if (status === 'Running...') return '#2196f3'; // Blue
         return '#ff9800'; // Orange for others (TLE, RE, etc.)
