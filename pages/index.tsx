@@ -6,10 +6,11 @@ import ProblemDisplay from '../components/ProblemDisplay';
 import CodeEditor from '../components/CodeEditor';
 import ResultDisplay from '../components/ResultDisplay';
 import SolutionDisplay from '../components/SolutionDisplay';
-import { Container, Typography, Select, MenuItem, Button, Box, CircularProgress, AppBar, Toolbar, FormControl, InputLabel } from '@mui/material';
+import { Container, Typography, Select, MenuItem, Button, Box, CircularProgress, AppBar, Toolbar, FormControl, InputLabel, TextField } from '@mui/material';
 
 const HomePage: React.FC = () => {
     const [difficulty, setDifficulty] = useState<string>('A');
+    const [genre, setGenre] = useState<string>('');
     const [problem, setProblem] = useState<Problem | null>(null);
     const [language, setLanguage] = useState<string>('python');
     const [code, setCode] = useState<string>('');
@@ -23,7 +24,7 @@ const HomePage: React.FC = () => {
         setProblem(null);
         setResult(null);
         try {
-            const newProblem = await generateProblem(difficulty);
+            const newProblem = await generateProblem(difficulty, genre);
             setProblem(newProblem);
             setCode(newProblem.solution_code); // Pre-fill editor with solution for convenience
         } catch (error) {
@@ -111,6 +112,13 @@ const HomePage: React.FC = () => {
                             {['A', 'B', 'C', 'D', 'E'].map(d => <MenuItem key={d} value={d}>{d}</MenuItem>)}
                         </Select>
                     </FormControl>
+                    <TextField
+                        label="問題のジャンル (任意)"
+                        variant="outlined"
+                        value={genre}
+                        onChange={(e) => setGenre(e.target.value)}
+                        sx={{ minWidth: 200 }}
+                    />
                     <Button variant="contained" onClick={handleGenerateProblem} disabled={isLoading}>
                         {isLoading ? <CircularProgress size={24} /> : '問題生成'}
                     </Button>

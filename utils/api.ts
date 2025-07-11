@@ -3,16 +3,24 @@ import { Problem } from '../types/problem';
 import { logger } from './logger';
 
 const API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=${API_KEY}`;
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${API_KEY}`;
 
-const getPrompt = (difficulty: string): string => {
-    const basePrompt = `
+const getPrompt = (difficulty: string, genre?: string): string => {
+    let basePrompt = `
 あなたは、世界クラスの競技プログラミングの問題作成者です。独創的で、教育的価値のある問題を考案する専門家です。
 
 以下の {difficulty} に基づいて、競技プログラミングの問題を1問作成してください。出力は必ず指定のJSON形式で返してください。
+`;
 
+    if (genre && genre.trim() !== '') {
+        basePrompt += `
+特に、今回は「${genre}」というジャンルの問題を作成してください。
+`;
+    }
+
+    basePrompt += `
 - **問題**: {difficulty} レベルのアルゴリズムやデータ構造の知識を問う、ユニークな問題を設計してください。
-- **出力形式**: 以下のキーを持つJSONオブジェクトを生成してください。
+- **出力形式**: 以下のキーを持つJSONオブジェクトを生成してください��
     - title: 問題タイトル (string)
     - statement: 問題文 (string)
     - constraints: 制約条件 (string)
@@ -34,15 +42,15 @@ const getPrompt = (difficulty: string): string => {
     return basePrompt.replace(/{difficulty}/g, difficultyRequirements[difficulty as keyof typeof difficultyRequirements] || difficultyRequirements['A']);
 };
 
-export const generateProblem = async (difficulty: string): Promise<Problem> => {
-    logger.info(`Attempting to generate problem with difficulty: ${difficulty}`);
+export const generateProblem = async (difficulty: string, genre?: string): Promise<Problem> => {
+    logger.info(`Attempting to generate problem with difficulty: ${difficulty} and genre: ${genre}`);
 
     if (!API_KEY) {
         logger.error("API key is not configured.");
         throw new Error("API key is not configured. Please set REACT_APP_GEMINI_API_KEY in your .env file.");
     }
 
-    const prompt = getPrompt(difficulty);
+    const prompt = getPrompt(difficulty, genre);
     logger.debug("Generated Prompt:", prompt);
 
     try {
