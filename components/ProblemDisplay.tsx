@@ -8,12 +8,11 @@ interface Props {
 }
 
 const MathRenderer: React.FC<{ text: string }> = ({ text }) => {
-    const parts = text.split(new RegExp("(\\$[\\s\\S]*?\\$\\$|\\$[\\s\\S]*?\\$)", "g"));
+    const mathRegex = /(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$)/g;
+    const parts = text.split(mathRegex);
 
     return (
-
         <>
-
             {parts.map((part, index) => {
                 if (part.startsWith('$$') && part.endsWith('$$')) {
                     return <BlockMath key={index} math={part.slice(2, -2)} />;
