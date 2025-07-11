@@ -8,9 +8,10 @@ interface Props {
 }
 
 const MathRenderer: React.FC<{ text: string }> = ({ text }) => {
-    const parts = text.split(/(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$)/g);
+    const parts = text.split(new RegExp("(\\$[\\s\\S]*?\\$\\$|\\$[\\s\\S]*?\\$)", "g"));
 
     return (
+
         <>
 
             {parts.map((part, index) => {
