@@ -124,7 +124,7 @@ const HomePage: React.FC = () => {
                     </Button>
                 </Box>
 
-                {isLoading && <Typography>問題を生成中...</Typography>}
+                {isLoading && <Typography>問題を生成中...(これには数分ほど時間がかかる場合があります)</Typography>}
 
                 {problem && (
                     <>

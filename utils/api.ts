@@ -20,7 +20,7 @@ const getPrompt = (difficulty: string, genre?: string): string => {
 
     basePrompt += `
 - **問題**: {difficulty} レベルのアルゴリズムやデータ構造の知識を問う、ユニークな問題を設計してください。
-- **出力形式**: 以下のキーを持つJSONオブジェクトを生成してください��
+- **出力形式**: 以下のキーを持つJSONオブジェクトを生成してください
     - title: 問題タイトル (string)
     - statement: 問題文 (string)
     - constraints: 制約条件 (string)
