@@ -96,7 +96,7 @@ const HomePage: React.FC = () => {
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        AI競技プログラミング練習サイト
+                        ☆問題生成機能付き競プロ練習アプリ
                     </Typography>
                 </Toolbar>
             </AppBar>
